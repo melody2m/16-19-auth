@@ -21,15 +21,15 @@ describe('POST /profiles', () => {
           .set('Authorization', `Bearer ${accountSetMock.token}`)
           .send({
             catchphrase: 'yolo',
-            pseudonym: 'ur',
-            persona: 'mom',
+            pseudonym: 'joe',
+            persona: 'barber',
           });
       })
       .then((response) => {
         expect(response.status).toEqual(200);
         expect(response.body.account).toEqual(accountMock.account._id.toString());
-        expect(response.body.pseudonym).toEqual('ur');
-        expect(response.body.persona).toEqual('mom');
+        expect(response.body.pseudonym).toEqual('joe');
+        expect(response.body.persona).toEqual('barber');
         expect(response.body.catchphrase).toEqual('yolo');
       });
   });

@@ -9,6 +9,10 @@ In the next part of the lab, the developers added a 'get' route for user login, 
 
 Also added are middleware for authenticating sessions via use of tokens and the "secret key".
 
---
 
-More functionality will be built in as the lab continues.
+--Thursday--
+
+The developers have added functionality for posting data (pictures of trees) to an AWS-hosted database. Users will have to pass bearer-authentication to be given access.
+
+There are also routes for GETting and DELETEing resources posted to AWS.
+
