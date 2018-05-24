@@ -20,7 +20,7 @@ describe('TESTING ROUTES AT /trees', function () {
   // -----POST-----
 
   describe('POST 200 for successful post /trees', function () {
-    test.only('should return 200 for sucessful tree post', function () {
+    test('should return 200 for sucessful tree post', function () {
       jest.setTimeout(20000);
       return (0, _treeMock.pCreateTreeMock)().then(function (mockResponse) {
         var token = mockResponse.accountMock.token;
@@ -46,45 +46,51 @@ describe('TESTING ROUTES AT /trees', function () {
       });
     });
   });
-
-  // -----GET-----
-
-  describe('GET 200 for successful get /trees', function () {
-    test('should return 200 for sucessful tree get', function () {
-      jest.setTimeout(20000);
-      return (0, _treeMock.pCreateTreeMock)().then(function (mockResponse) {
-        var token = mockResponse.accountMock.token;
-
-        return _superagent2.default.get(apiUrl + '/trees/' + mockResponse._id).set('Authorization', 'Bearer ' + token).then(function (response) {
-          expect(response.status).toEqual(200);
-          expect(response.body.title).toEqual('super tree');
-          expect(response.body._id).toBeTruthy();
-          expect(response.body.url).toBeTruthy();
-        });
-      }).catch(function (err) {
-        console.log(err.message, 'ERR IN TEST');
-        console.log(err.status, 'CODE ERR IN TEST');
-        expect(err.status).toEqual(400);
-      });
-    });
-  });
-
-  // -----DELETE-----
-
-  describe('DELETE 204 for successful delete /trees', function () {
-    test('should return 204 for sucessful tree delete', function () {
-      jest.setTimeout(20000);
-      return (0, _treeMock.pCreateTreeMock)().then(function (mockResponse) {
-        var token = mockResponse.accountMock.token;
-
-        return _superagent2.default.delete(apiUrl + '/trees/' + mockResponse._id).set('Authorization', 'Bearer ' + token).then(function (response) {
-          expect(response.status).toEqual(204);
-        });
-      }).catch(function (err) {
-        console.log(err.message, 'ERR IN TEST');
-        console.log(err.status, 'CODE ERR IN TEST');
-        expect(err.status).toEqual(400);
-      });
-    });
-  });
 });
+
+// -----GET-----
+
+// describe('GET 200 for successful get /trees', () => {
+//   test('should return 200 for sucessful tree get', () => {
+//     jest.setTimeout(20000);
+//     return pCreateTreeMock()
+//       .then((mockResponse) => {
+//         const { token } = mockResponse.accountMock;
+//         return superagent.get(`${apiUrl}/trees/${mockResponse._id}`)
+//           .set('Authorization', `Bearer ${token}`)
+//           .then((response) => {
+//             expect(response.status).toEqual(200);
+//             expect(response.body.title).toEqual('super tree');
+//             expect(response.body._id).toBeTruthy();
+//             expect(response.body.url).toBeTruthy();
+//           });
+//       })
+//       .catch((err) => {
+//         console.log(err.message, 'ERR IN TEST');
+//         console.log(err.status, 'CODE ERR IN TEST');
+//         expect(err.status).toEqual(400);
+//       });
+//   });
+// });
+
+// // -----DELETE-----
+
+// describe('DELETE 204 for successful delete /trees', () => {
+//   test('should return 204 for sucessful tree delete', () => {
+//     jest.setTimeout(20000);
+//     return pCreateTreeMock()
+//       .then((mockResponse) => {
+//         const { token } = mockResponse.accountMock;
+//         return superagent.delete(`${apiUrl}/trees/${mockResponse._id}`)
+//           .set('Authorization', `Bearer ${token}`)
+//           .then((response) => {
+//             expect(response.status).toEqual(204);
+//           });
+//       })
+//       .catch((err) => {
+//         console.log(err.message, 'ERR IN TEST');
+//         console.log(err.status, 'CODE ERR IN TEST');
+//         expect(err.status).toEqual(400);
+//       });
+//   });
+// });
