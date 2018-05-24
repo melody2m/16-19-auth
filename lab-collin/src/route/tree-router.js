@@ -37,46 +37,46 @@ treeRouter.post('/trees', bearerAuthMiddleWare, multerUpload.any(), (request, re
 });
 
 
-treeRouter.get('/trees/:id', bearerAuthMiddleWare, (request, response, next) => {
-  if (!request.account) {
-    return next(new HttpError(404, 'TREE ROUTER _ERROR_, not found'));
-  }
+// treeRouter.get('/trees/:id', bearerAuthMiddleWare, (request, response, next) => {
+//   if (!request.account) {
+//     return next(new HttpError(404, 'TREE ROUTER _ERROR_, not found'));
+//   }
 
-  if (!request.params.id) {
-    return next(new HttpError(400, 'TREE ROUTER __ERROR__ invalid request'));
-  }
+//   if (!request.params.id) {
+//     return next(new HttpError(400, 'TREE ROUTER __ERROR__ invalid request'));
+//   }
 
-  return Tree.findById(request.params.id)
-    .then((tree) => {
-      if (!tree) {
-        logger.log(logger.ERROR, 'tree ROUTER: responding with 404 status code !tree');
-        return next(new HttpError(404, 'tree not found'));
-      }
+//   return Tree.findById(request.params.id)
+//     .then((tree) => {
+//       if (!tree) {
+//         logger.log(logger.ERROR, 'tree ROUTER: responding with 404 status code !tree');
+//         return next(new HttpError(404, 'tree not found'));
+//       }
 
-      logger.log(logger.INFO, 'tree ROUTER: responding with 200 status code');
-      logger.log(logger.INFO, `tree ROUTER: ${JSON.stringify(tree)}`);
-      return response.json(tree);
-    })
-    .catch(next);
-});
+//       logger.log(logger.INFO, 'tree ROUTER: responding with 200 status code');
+//       logger.log(logger.INFO, `tree ROUTER: ${JSON.stringify(tree)}`);
+//       return response.json(tree);
+//     })
+//     .catch(next);
+// });
 
-treeRouter.delete('/trees/:id', bearerAuthMiddleWare, (request, response, next) => {
-  if (!request.account) {
-    return next(new HttpError(404, 'TREE ROUTER _ERROR_, not found'));
-  }
+// treeRouter.delete('/trees/:id', bearerAuthMiddleWare, (request, response, next) => {
+//   if (!request.account) {
+//     return next(new HttpError(404, 'TREE ROUTER _ERROR_, not found'));
+//   }
 
-  if (!request.params.id) {
-    return next(new HttpError(400, 'TREE ROUTER __ERROR__ invalid request'));
-  }
+//   if (!request.params.id) {
+//     return next(new HttpError(400, 'TREE ROUTER __ERROR__ invalid request'));
+//   }
 
-  return Tree.findByIdAndRemove(request.params.id)
-    .then((tree) => {
-      return s3Remove(tree.filename)
-        .then(() => {
-          return response.sendStatus(204);
-        });
-    });
-});
+//   return Tree.findByIdAndRemove(request.params.id)
+//     .then((tree) => {
+//       return s3Remove(tree.filename)
+//         .then(() => {
+//           return response.sendStatus(204);
+//         });
+//     });
+// });
 
 export default treeRouter;
 
