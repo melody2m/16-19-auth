@@ -56,7 +56,7 @@ app.use(_errorMiddleware2.default);
 
 var startServer = function startServer() {
   return _mongoose2.default.connect(process.env.MONGODB_URI).then(function () {
-    server = app.listen(process.env.PORT, function () {
+    server = app(process.env.PORT, function () {
       _logger2.default.log(_logger2.default.INFO, 'Server is listening on port ' + process.env.PORT);
     });
   });

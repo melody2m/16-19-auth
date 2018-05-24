@@ -2,7 +2,8 @@
   "name": "16",
   "version": "1.0.0",
   "engines": {
-    "node": "9.11"
+    "node": "8.11",
+    "npm": "5.6.0"
   },
   "description": "--Monday--",
   "main": "index.js",
