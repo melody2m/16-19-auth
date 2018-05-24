@@ -1,5 +1,5 @@
-// 'use strict';
-//
-// const server = require('./lib/server');
-//
-// server.start();
+'use strict';
+
+const server = require('./lib/server');
+
+server.start();
