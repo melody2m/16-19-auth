@@ -57,41 +57,45 @@ treeRouter.post('/trees', _bearerAuthMiddleware2.default, multerUpload.any(), fu
   }).catch(next);
 });
 
-treeRouter.get('/trees/:id', _bearerAuthMiddleware2.default, function (request, response, next) {
-  if (!request.account) {
-    return next(new _httpErrors2.default(404, 'TREE ROUTER _ERROR_, not found'));
-  }
+// treeRouter.get('/trees/:id', bearerAuthMiddleWare, (request, response, next) => {
+//   if (!request.account) {
+//     return next(new HttpError(404, 'TREE ROUTER _ERROR_, not found'));
+//   }
 
-  if (!request.params.id) {
-    return next(new _httpErrors2.default(400, 'TREE ROUTER __ERROR__ invalid request'));
-  }
+//   if (!request.params.id) {
+//     return next(new HttpError(400, 'TREE ROUTER __ERROR__ invalid request'));
+//   }
 
-  return _tree2.default.findById(request.params.id).then(function (tree) {
-    if (!tree) {
-      _logger2.default.log(_logger2.default.ERROR, 'tree ROUTER: responding with 404 status code !tree');
-      return next(new _httpErrors2.default(404, 'tree not found'));
-    }
+//   return Tree.findById(request.params.id)
+//     .then((tree) => {
+//       if (!tree) {
+//         logger.log(logger.ERROR, 'tree ROUTER: responding with 404 status code !tree');
+//         return next(new HttpError(404, 'tree not found'));
+//       }
 
-    _logger2.default.log(_logger2.default.INFO, 'tree ROUTER: responding with 200 status code');
-    _logger2.default.log(_logger2.default.INFO, 'tree ROUTER: ' + JSON.stringify(tree));
-    return response.json(tree);
-  }).catch(next);
-});
+//       logger.log(logger.INFO, 'tree ROUTER: responding with 200 status code');
+//       logger.log(logger.INFO, `tree ROUTER: ${JSON.stringify(tree)}`);
+//       return response.json(tree);
+//     })
+//     .catch(next);
+// });
 
-treeRouter.delete('/trees/:id', _bearerAuthMiddleware2.default, function (request, response, next) {
-  if (!request.account) {
-    return next(new _httpErrors2.default(404, 'TREE ROUTER _ERROR_, not found'));
-  }
+// treeRouter.delete('/trees/:id', bearerAuthMiddleWare, (request, response, next) => {
+//   if (!request.account) {
+//     return next(new HttpError(404, 'TREE ROUTER _ERROR_, not found'));
+//   }
 
-  if (!request.params.id) {
-    return next(new _httpErrors2.default(400, 'TREE ROUTER __ERROR__ invalid request'));
-  }
+//   if (!request.params.id) {
+//     return next(new HttpError(400, 'TREE ROUTER __ERROR__ invalid request'));
+//   }
 
-  return _tree2.default.findByIdAndRemove(request.params.id).then(function (tree) {
-    return (0, _s.s3Remove)(tree.filename).then(function () {
-      return response.sendStatus(204);
-    });
-  });
-});
+//   return Tree.findByIdAndRemove(request.params.id)
+//     .then((tree) => {
+//       return s3Remove(tree.filename)
+//         .then(() => {
+//           return response.sendStatus(204);
+//         });
+//     });
+// });
 
 exports.default = treeRouter;
