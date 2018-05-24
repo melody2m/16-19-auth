@@ -1,13 +1,13 @@
 'use strict';
 
-const express = require('express');
-const mongoose = require('mongoose');
-const logger = require('./logger');
-const authRoutes = require('../route/auth-router');
-const profileRoutes = require('../route/profile-router');
-const loggerMiddleware = require('./logger-middleware');
-const treeRoutes = require('../route/tree-router');
-const errorMiddleware = require('./error-middleware');
+import express from 'express';
+import mongoose from 'mongoose';
+import logger from './logger';
+import authRoutes from '../route/auth-router';
+import profileRoutes from '../route/profile-router';
+import loggerMiddleware from './logger-middleware';
+import treeRoutes from '../route/tree-router';
+import errorMiddleware from './error-middleware';
 
 const app = express();
 let server = null;
@@ -42,4 +42,4 @@ const stopServer = () => {
     });
 };
 
-module.exports = { startServer, stopServer };
+export { startServer, stopServer };
