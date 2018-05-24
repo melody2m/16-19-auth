@@ -25,6 +25,7 @@
   "license": "ISC",
   "devDependencies": {
     "aws-sdk-mock": "^2.0.0",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -38,7 +39,6 @@
   },
   "dependencies": {
     "aws-sdk": "^2.237.1",
-    "babel-cli": "^6.26.0",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "crypto": "^1.0.1",
