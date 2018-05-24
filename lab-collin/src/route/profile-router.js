@@ -16,7 +16,10 @@ profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, resp
   }
 
   return new Profile({
-    ...request.body,
+    pseudonym: request.body.pseudonym,
+    persona: request.body.persona,
+    catchphrase: request.body.catchphrase,
+    visage: request.body.visage,
     account: request.account._id,
   })
     .save()
@@ -25,6 +28,19 @@ profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, resp
       return response.json(profile);
     })
     .catch(next);
+});
+
+profileRouter.get('/profiles/:id', bearerAuthMiddleware, (request, response, next) => {
+  if (!request.account) {
+    return next(new HttpError(400, 'AUTH - invalid request'));
+  }
+  if (!request.params.id) {
+    return next(new HttpError(400, 'AUTH - invalid request'));
+  }
+  return Profile.findById(request.params.id)
+    .then((profile) => {
+      return response.json(profile);
+    });
 });
 
 export default profileRouter;

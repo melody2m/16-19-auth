@@ -46,17 +46,17 @@ treeRouter.get('/trees/:id', bearerAuthMiddleWare, (request, response, next) => 
     return next(new HttpError(400, 'TREE ROUTER __ERROR__ invalid request'));
   }
 
-  const key = request.params.id;
+  return Tree.findById(request.params.id)
+    .then((tree) => {
+      if (!tree) {
+        logger.log(logger.ERROR, 'tree ROUTER: responding with 404 status code !tree');
+        return next(new HttpError(404, 'tree not found'));
+      }
 
-  return s3Get(key)
-    .then((url) => {
-      return new Tree({
-        title: response.body.title,
-        account: response.account._id,
-        url,
-      }).save();
+      logger.log(logger.INFO, 'tree ROUTER: responding with 200 status code');
+      logger.log(logger.INFO, `tree ROUTER: ${JSON.stringify(tree)}`);
+      return response.json(tree);
     })
-    .then(tree => response.json(tree))
     .catch(next);
 });
 
@@ -69,11 +69,12 @@ treeRouter.delete('/trees/:id', bearerAuthMiddleWare, (request, response, next) 
     return next(new HttpError(400, 'TREE ROUTER __ERROR__ invalid request'));
   }
 
-  const key = request.params.id;
-
-  return s3Remove(key)
-    .then(() => {
-      return response.sendStatus(204);
+  return Tree.findByIdAndRemove(request.params.id)
+    .then((tree) => {
+      return s3Remove(tree.filename)
+        .then(() => {
+          return response.sendStatus(204);
+        });
     });
 });
 

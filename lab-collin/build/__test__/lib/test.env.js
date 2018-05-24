@@ -1,9 +1,11 @@
+'use strict';
+
 process.env.NODE_ENV = 'development';
 process.env.PORT = 7000;
 process.env.MONGODB_URI = 'mongodb://localhost/testing';
 process.env.TREES_SECRET = 'fakeSecret';
 
-const isAwsMock = true;
+var isAwsMock = true;
 
 if (isAwsMock) {
   process.env.AWS_BUCKET = 'fake';
